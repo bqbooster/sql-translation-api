@@ -6,7 +6,7 @@ services:
     image: sql-translation-api:prod
     ports:
       - "3100:3100"
-    command: gunicorn --bind 0.0.0.0:3100 app:app
+    command: uv run gunicorn --bind 0.0.0.0:3100 app:app
 
 networks:
   proxynet:

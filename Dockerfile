@@ -17,12 +17,8 @@ WORKDIR /app
 COPY pyproject.toml ./
 
 # Install poetry and dependencies
-RUN pip install --no-cache-dir poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev
-
-# Install Gunicorn
-RUN pip install gunicorn    
+RUN pip install --no-cache-dir uv && \
+    uv sync
 
 # Copy the current directory contents into the container at /app
 COPY . .
@@ -31,4 +27,4 @@ COPY . .
 EXPOSE 80
 
 # Use Gunicorn as the production WSGI server
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:80", "app:app"]
+CMD ["uv", "run", "gunicorn", "-w", "4", "-b", "0.0.0.0:80", "app:app"]

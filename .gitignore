@@ -10,6 +10,7 @@ build/
 # Poetry
 .poetry/
 poetry.lock
+uv.lock
 venv/
 
 # IDE
